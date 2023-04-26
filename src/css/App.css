@@ -1,0 +1,36 @@
+.container {
+  border: 3px solid rgb(187, 7, 187);
+  width: 200px;
+  height: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  border: 3px solid rgb(235, 134, 52);
+  margin: 7px;
+  padding: 5px;
+  width: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.componentText {
+  border: 3px solid blue;
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px 0;
+  height: 3rem;
+}
+
+/* Add this new class */
+.button-group {
+  display: flex;
+}
