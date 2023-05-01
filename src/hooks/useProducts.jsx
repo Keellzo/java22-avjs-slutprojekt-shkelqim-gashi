@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getProducts, updateProductStock } from "../services/Firebase";
 
-
 // Custom hook that manages the state and logic for fetching, filtering, and sorting products, as well as updating and restoring stock
 export function useProducts() {
   const [products, setProducts] = useState([]);
@@ -20,13 +19,22 @@ export function useProducts() {
 
   // Restores the stock of cart items to their original values in Firebase and updates the products state
   async function restoreStock(cartItems) {
+    const updatedProducts = [...products];
+
     for (const item of cartItems) {
       const newStock = item.originalStock;
       await updateProductStock(item.id, newStock);
-      setProducts(
-        products.map((p) => (p.id === item.id ? { ...p, stock: newStock } : p))
-      );
+
+      const productIndex = updatedProducts.findIndex((p) => p.id === item.id);
+      if (productIndex !== -1) {
+        updatedProducts[productIndex] = {
+          ...updatedProducts[productIndex],
+          stock: newStock,
+        };
+      }
     }
+
+    setProducts(updatedProducts);
   }
 
   // Sorts the given products array based on the selected sortOption
