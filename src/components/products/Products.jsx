@@ -15,12 +15,12 @@ export default function Products({ onAddToCart, products }) {
             {product.stock > 0 ? (
               <button
                 className="product-button"
-                onClick={() => product.stock > 0 && onAddToCart(product)}
+                onClick={() => onAddToCart(product)}
               >
                 Add to Cart
               </button>
             ) : (
-              <p>Out of stock</p>
+              <p className="fat-paragraph">Out of stock</p>
             )}
           </article>
         ))}

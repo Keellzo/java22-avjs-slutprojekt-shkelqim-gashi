@@ -25,10 +25,9 @@ export function useCart() {
     setCartItems([]);
   }
 
-  // Empties the cartItems state and alerts the user
+  // Empties the cartItems state after completing the purchase
   function completePurchase() {
-    emptyCart();
-    alert("Thank you for your purchase!");
+    setCartItems([]);
   }
 
   return {

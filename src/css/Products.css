@@ -66,9 +66,12 @@ article h3 {
 }
 
 .product-button:hover {
-  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.815);
   color: #fff;
-  background-color: #2e2d2d;
+}
+
+.fat-paragraph{
+  font-weight: bold;
 }
 
 @media (max-width: 1200px) {

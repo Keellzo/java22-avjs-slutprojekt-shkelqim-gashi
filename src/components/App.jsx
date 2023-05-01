@@ -4,6 +4,7 @@ import Menu from "./Menu";
 import Products from "./products/Products";
 import ShoppingCart from "./ShoppingCart";
 import ProductFilter from "./products/Filter";
+import Receipt from "./Receipt";
 import { useProducts } from "../hooks/useProducts";
 import { useCart } from "../hooks/useCart";
 import { useState } from "react";
@@ -14,6 +15,8 @@ function App() {
   const { products, setSortOption, setFilterText, updateStock, restoreStock } =
     useProducts();
   const { cartItems, addToCart, emptyCart, completePurchase } = useCart();
+  const [showReceipt, setShowReceipt] = useState(false);
+  const [purchasedItems, setPurchasedItems] = useState([]);
 
   // Handles adding a product to the cart and updates the product stock
   async function handleAddToCart(product) {
@@ -63,14 +66,26 @@ function App() {
         <ShoppingCart
           cartItems={cartItems}
           onEmptyCart={emptyCart}
-          onCompletePurchase={completePurchase}
+          onCompletePurchase={() => {
+            setPurchasedItems(cartItems);
+            completePurchase();
+            setShowReceipt(true);
+          }}
           onBackToProducts={() => setView("products")}
           onRestoreStock={restoreStock}
+        />
+      )}
+      {showReceipt && (
+        <Receipt
+          cartItems={purchasedItems}
+          onClose={() => {
+            setShowReceipt(false);
+            setView("products");
+          }}
         />
       )}
     </div>
   );
 }
-
 const root = createRoot(document.getElementById("root"));
 root.render(<App />);

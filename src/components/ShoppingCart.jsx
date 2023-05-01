@@ -1,7 +1,5 @@
 import "../css/ShoppingCart.css";
 
-import { updateProductStock } from "../services/Firebase";
-
 // ShoppingCart component displays the cart items, total cost, and action buttons
 export default function ShoppingCart({
   cartItems,
@@ -16,11 +14,8 @@ export default function ShoppingCart({
   );
 
   // Completes the purchase by updating product stocks and triggering onCompletePurchase
-  async function completePurchase() {
-    for (const item of cartItems) {
-      const newStock = Math.max(item.stock - item.quantity, 0);
-      await updateProductStock(item.id, newStock);
-    }
+  function completePurchase() {
+    onEmptyCart();
     onCompletePurchase();
   }
 
@@ -53,14 +48,14 @@ export default function ShoppingCart({
             </div>
             <div className="cart-item-details">
               <h3 className="cart-item-name">{item.name}</h3>
-              <p className="cart-item-price">Price: {item.price}</p>
+              <p className="cart-item-price">Price: {item.price} :-</p>
               <p className="cart-item-quantity">Quantity: {item.quantity}</p>
             </div>
           </article>
         ))}
       </div>
       <div className="cart-summary">
-        <h3 className="cart-total">Total: {total.toFixed(1)} :-</h3>
+        <h3 className="cart-total">Total: {total.toFixed()} :-</h3>
       </div>
     </section>
   );

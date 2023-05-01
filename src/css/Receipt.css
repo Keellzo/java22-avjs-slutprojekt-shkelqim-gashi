@@ -1,0 +1,102 @@
+.receipt {
+  width: 50%;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.receipt h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.receipt p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.receipt table {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.receipt thead {
+  border-bottom: 1px solid #000;
+}
+
+.receipt th {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+
+.receipt tr {
+  margin-bottom: 5px;
+}
+
+.receipt td {
+  font-size: 16px;
+  padding: 10px 0;
+}
+
+.receipt h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.receipt button {
+  border-radius: 5px;
+  background-color: #525252;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0);
+  border: 2px solid #bebdbd;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: 2px solid #bebdbd;
+  transition: all 0.1s ease-in-out;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.receipt button:hover {
+  text-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.815);
+  color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .receipt {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .receipt {
+    width: 90%;
+  }
+
+  .receipt h2 {
+    font-size: 20px;
+  }
+
+  .receipt p,
+  .receipt th,
+  .receipt td {
+    font-size: 14px;
+  }
+
+  .receipt h3 {
+    font-size: 16px;
+  }
+
+  .receipt button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
