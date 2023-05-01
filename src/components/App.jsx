@@ -68,7 +68,7 @@ function App() {
           onEmptyCart={emptyCart}
           onCompletePurchase={() => {
             setPurchasedItems(cartItems);
-            completePurchase();
+            emptyCart();
             setShowReceipt(true);
           }}
           onBackToProducts={() => setView("products")}

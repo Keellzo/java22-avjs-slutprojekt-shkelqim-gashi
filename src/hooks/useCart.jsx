@@ -25,15 +25,9 @@ export function useCart() {
     setCartItems([]);
   }
 
-  // Empties the cartItems state after completing the purchase
-  function completePurchase() {
-    setCartItems([]);
-  }
-
   return {
     cartItems,
     addToCart,
     emptyCart,
-    completePurchase,
   };
 }
