@@ -11,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-top: 1rem;
 }
 
 .cart-title {
@@ -98,7 +99,7 @@
 
 .cart-buttons button {
   display: flex;
-  background-color: #1c1c1c;
+  background-color: #525252;
   color: #ffffff;
   padding: 10px 20px;
   border: 2px solid #bebdbd;
@@ -107,14 +108,13 @@
   cursor: pointer;
   font-size: 16px;
   margin-left: 20px;
-  margin-top: 10px;
   border-radius: 5px;
 }
 
 .cart-buttons button:hover {
   box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.5);
   color: #fff;
-  background-color: #353535;
+  background-color: #2e2d2d;
 }
 
 @media (max-width: 768px) {

@@ -39,19 +39,21 @@ function App() {
       }
       {view === "products" && (
         <>
-          <div className="filters filter-container">
-            <ProductFilter
-              sortOptions={[
-                { label: "", value: "" },
-                { label: "Name", value: "name" },
-                { label: "Price (Low to High)", value: "priceLowToHigh" },
-                { label: "Price (High to Low)", value: "priceHighToLow" },
-              ]}
-              onSortChange={setSortOption}
-              onFilterChange={setFilterText}
-            />
+          <div className="main-container">
+            <div className="filters filter-container">
+              <ProductFilter
+                sortOptions={[
+                  { label: "", value: "" },
+                  { label: "Name", value: "name" },
+                  { label: "Price (Low to High)", value: "priceLowToHigh" },
+                  { label: "Price (High to Low)", value: "priceHighToLow" },
+                ]}
+                onSortChange={setSortOption}
+                onFilterChange={setFilterText}
+              />
+            </div>
+            <Products products={products} onAddToCart={handleAddToCart} />
           </div>
-          <Products products={products} onAddToCart={handleAddToCart} />
         </>
       )}
       {

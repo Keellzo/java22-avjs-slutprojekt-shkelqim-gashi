@@ -1,20 +1,21 @@
 .filter-container {
-  margin-top: 80px;
-  max-width: 1475px;
-  margin: 80px auto 0;
+  margin-top: 100px;
+  margin-bottom: 20px;
 }
+
 
 .filters {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: #bebdbd;
 }
 
 .filters label {
   font-size: 16px;
   margin-left: 10px;
+  color: #ffffff;
 }
 
 .filters select,
@@ -22,6 +23,9 @@
   font-size: 16px;
   padding: 5px;
   margin-left: 12px;
+  color: #1c1c1c;
+  background-color: #ffffff;
+  border: none;
 }
 
 @media (max-width: 1024px) {
@@ -49,7 +53,10 @@
 
 @media (max-width: 480px) {
   .filter-container {
-    margin: 40px auto 0;
+    margin-top: 100px;
+    margin-left: 1rem;
+    margin-bottom: 20px;
+    max-width: 100%;
   }
 
   .filters {

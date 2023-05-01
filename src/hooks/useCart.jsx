@@ -16,10 +16,7 @@ export function useCart() {
       newCartItems[existingProductIndex].quantity += 1;
       setCartItems(newCartItems);
     } else {
-      setCartItems([
-        ...cartItems,
-        { ...product, quantity: 1 },
-      ]);
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
   }
 
