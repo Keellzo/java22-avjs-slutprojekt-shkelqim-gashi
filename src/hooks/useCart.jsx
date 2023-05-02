@@ -1,22 +1,32 @@
 import { useState } from "react";
 
-// Custom hook that manages the state and logic for handling cart items, adding products to the cart, emptying the cart, and completing the purchase.
-
-export function useCart() {
+export function useCart(updateStock) {
   const [cartItems, setCartItems] = useState([]);
 
-  // Adds the given product to the cartItems state
-  function addToCart(product) {
-    const existingProductIndex = cartItems.findIndex(
-      (item) => item.id === product.id
-    );
+  // handleAddToCart checks product stock, updates it, and adds the product to the cart.
+  async function handleAddToCart(product) {
+    if (product.stock > 0) {
+      const newStock = Math.max(product.stock - 1, 0);
+      await updateStock(product.id, newStock);
 
-    if (existingProductIndex > -1) {
-      const newCartItems = [...cartItems];
-      newCartItems[existingProductIndex].quantity += 1;
-      setCartItems(newCartItems);
-    } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      setCartItems((prevCartItems) => {
+        const productInCart = prevCartItems.find(
+          (item) => item.id === product.id
+        );
+
+        if (productInCart) {
+          return prevCartItems.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        } else {
+          return [
+            ...prevCartItems,
+            { ...product, stock: newStock, originalStock: product.stock, quantity: 1 },
+          ];
+        }
+      });
     }
   }
 
@@ -27,7 +37,7 @@ export function useCart() {
 
   return {
     cartItems,
-    addToCart,
     emptyCart,
+    handleAddToCart,
   };
 }

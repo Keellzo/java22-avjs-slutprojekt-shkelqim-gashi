@@ -9,23 +9,13 @@ import { useProducts } from "../hooks/useProducts";
 import { useCart } from "../hooks/useCart";
 import { useState } from "react";
 
-// App component which serves as the main container for the application
 function App() {
   const [view, setView] = useState("products");
   const { products, setSortOption, setFilterText, updateStock, restoreStock } =
     useProducts();
-  const { cartItems, addToCart, emptyCart, completePurchase } = useCart();
+  const { cartItems, emptyCart, handleAddToCart } = useCart(updateStock);
   const [showReceipt, setShowReceipt] = useState(false);
   const [purchasedItems, setPurchasedItems] = useState([]);
-
-  // Handles adding a product to the cart and updates the product stock
-  async function handleAddToCart(product) {
-    if (product.stock > 0) {
-      const newStock = Math.max(product.stock - 1, 0);
-      await updateStock(product.id, newStock);
-      addToCart({ ...product, stock: newStock, originalStock: product.stock });
-    }
-  }
 
   return (
     <div>
