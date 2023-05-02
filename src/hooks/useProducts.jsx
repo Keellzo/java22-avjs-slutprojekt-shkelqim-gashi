@@ -47,6 +47,7 @@ export function useProducts() {
 
     return sortOption ? products.sort(sortFunc[sortOption]) : products;
   }
+  
 
   // Filters the given products array based on the entered filterText
   function applyFilter(products) {
