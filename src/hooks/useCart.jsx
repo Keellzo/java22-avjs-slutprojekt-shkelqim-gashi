@@ -7,10 +7,10 @@ export function useCart(updateStock) {
   // handleAddToCart checks product stock and adds the product to the cart.
   function handleAddToCart(product) {
     const productInCart = cartItems.find((item) => item.id === product.id);
+    let newProduct = { ...product, stock: product.stock - 1 };
 
     // Check if product already exists in cart
     if (productInCart) {
-      // Only add product to cart if quantity is less than stock
       if (productInCart.quantity < product.stock) {
         setCartItems((prevCartItems) =>
           prevCartItems.map((item) =>
@@ -19,18 +19,17 @@ export function useCart(updateStock) {
               : item
           )
         );
-        updateStock(product.id, product.stock - 1);
+        updateStock(product.id, newProduct.stock);
       }
     } else if (product.stock > 0) {
-      // Only add product to cart if stock is greater than 0
       setCartItems([
         ...cartItems,
         {
-          ...product,
+          ...newProduct,
           quantity: 1,
         },
       ]);
-      updateStock(product.id, product.stock - 1);
+      updateStock(product.id, newProduct.stock);
     }
   }
 

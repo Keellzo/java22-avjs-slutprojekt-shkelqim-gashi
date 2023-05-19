@@ -57,5 +57,6 @@ export function useProducts() {
     setFilterText,
     updateStock,
     restoreStock,
+    fetchProducts,
   };
 }
