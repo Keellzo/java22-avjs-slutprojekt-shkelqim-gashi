@@ -16,7 +16,10 @@ export default function Products({ onAddToCart, products, cartItems }) {
 
           return (
             <article key={product.id}>
-              {/*...*/}
+              <img src={product.image} alt={product.name} />
+              <h3>{product.name}</h3>
+              <p>Price: {product.price}:-</p>
+              <p>Stock: {product.stock}</p>
               {isOutOfStock ? (
                 <p className="fat-paragraph">Out of stock</p>
               ) : (
