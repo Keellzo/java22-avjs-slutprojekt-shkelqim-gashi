@@ -37,12 +37,15 @@ export function useCart(updateStock, restoreStock) {
 
   // Updates the stock in the database once the purchase is completed
   async function handleCompletePurchase() {
-    for (const item of cartItems) {
+    const updates = cartItems.map((item) => {
       const newStock = item.stock - item.quantity;
-      await updateStock(item.id, newStock);
-    }
+      return updateStock(item.id, newStock);
+    });
+  
+    await Promise.all(updates);
     setCartItems([]);
   }
+  
 
   function restoreStock(cartItems) {
     cartItems.forEach((item) => {

@@ -66,10 +66,9 @@ function App() {
             setView("products");
           }}
           onCompletePurchase={() => {
-            setPurchasedItems(cartItems);
             handleCompletePurchase().then(() => {
+              setPurchasedItems(cartItems);
               setShowReceipt(true);
-              setView("products");
             });
           }}
           onBackToProducts={() => setView("products")}
