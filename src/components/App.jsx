@@ -13,7 +13,7 @@ function App() {
   const [view, setView] = useState("products");
   const { products, setSortOption, setFilterText, updateStock, restoreStock } =
     useProducts();
-  const { cartItems, emptyCart, handleAddToCart } = useCart(updateStock);
+  const { cartItems, emptyCart, handleAddToCart, handleCompletePurchase } = useCart(updateStock);
   const [showReceipt, setShowReceipt] = useState(false);
   const [purchasedItems, setPurchasedItems] = useState([]);
 
@@ -57,6 +57,7 @@ function App() {
           cartItems={cartItems}
           onEmptyCart={emptyCart}
           onCompletePurchase={() => {
+            handleCompletePurchase();
             setPurchasedItems(cartItems);
             emptyCart();
             setShowReceipt(true);
