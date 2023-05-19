@@ -5,28 +5,37 @@ export function useCart(updateStock) {
 
   // handleAddToCart checks product stock, updates it, and adds the product to the cart.
   async function handleAddToCart(product) {
-    if (product.stock > 0) {
-      const newStock = Math.max(product.stock - 1, 0);
-      await updateStock(product.id, newStock);
+    const productInCart = cartItems.find((item) => item.id === product.id);
 
-      setCartItems((prevCartItems) => {
-        const productInCart = prevCartItems.find(
-          (item) => item.id === product.id
-        );
+    // Check if product already exists in cart
+    if (productInCart) {
+      // Only add product to cart if quantity is less than stock
+      if (productInCart.quantity < product.stock) {
+        const newStock = Math.max(product.stock - 1, 0);
+        await updateStock(product.id, newStock);
 
-        if (productInCart) {
-          return prevCartItems.map((item) =>
+        setCartItems((prevCartItems) =>
+          prevCartItems.map((item) =>
             item.id === product.id
               ? { ...item, quantity: item.quantity + 1 }
               : item
-          );
-        } else {
-          return [
-            ...prevCartItems,
-            { ...product, stock: newStock, originalStock: product.stock, quantity: 1 },
-          ];
-        }
-      });
+          )
+        );
+      }
+    } else if (product.stock > 0) {
+      // Only add product to cart if stock is greater than 0
+      const newStock = Math.max(product.stock - 1, 0);
+      await updateStock(product.id, newStock);
+
+      setCartItems([
+        ...cartItems,
+        {
+          ...product,
+          stock: newStock,
+          originalStock: product.stock,
+          quantity: 1,
+        },
+      ]);
     }
   }
 

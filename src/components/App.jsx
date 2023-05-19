@@ -44,7 +44,11 @@ function App() {
               onFilterChange={setFilterText}
             />
           </div>
-          <Products products={products} onAddToCart={handleAddToCart} />
+          <Products
+            products={products}
+            onAddToCart={handleAddToCart}
+            cartItems={cartItems}
+          />
         </div>
       )}
 
