@@ -11,8 +11,7 @@ export default function Products({ onAddToCart, products, cartItems }) {
             (item) => item.id === product.id
           );
           const isOutOfStock =
-            product.stock <= 0 ||
-            (productInCart && productInCart.quantity >= product.stock);
+            product.stock - (productInCart ? productInCart.quantity : 0) <= 0;
 
           return (
             <article key={product.id}>

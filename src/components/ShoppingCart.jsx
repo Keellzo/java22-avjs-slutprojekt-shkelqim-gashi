@@ -15,7 +15,6 @@ export default function ShoppingCart({
 
   // Completes the purchase by updating product stocks and triggering onCompletePurchase
   function completePurchase() {
-    onEmptyCart();
     onCompletePurchase();
   }
 

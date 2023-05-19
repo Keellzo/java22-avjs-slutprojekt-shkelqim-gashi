@@ -1,13 +1,12 @@
 import { useState } from "react";
 
 // useCart.jsx
-export function useCart(updateStock) {
+export function useCart(updateStock, restoreStock) {
   const [cartItems, setCartItems] = useState([]);
 
   // handleAddToCart checks product stock and adds the product to the cart.
   function handleAddToCart(product) {
     const productInCart = cartItems.find((item) => item.id === product.id);
-    let newProduct = { ...product, stock: product.stock - 1 };
 
     // Check if product already exists in cart
     if (productInCart) {
@@ -19,18 +18,21 @@ export function useCart(updateStock) {
               : item
           )
         );
-        updateStock(product.id, newProduct.stock);
       }
     } else if (product.stock > 0) {
       setCartItems([
         ...cartItems,
         {
-          ...newProduct,
+          ...product,
           quantity: 1,
         },
       ]);
-      updateStock(product.id, newProduct.stock);
     }
+  }
+
+  function handleEmptyCart() {
+    restoreStock(cartItems);
+    setCartItems([]);
   }
 
   // Updates the stock in the database once the purchase is completed
@@ -42,9 +44,18 @@ export function useCart(updateStock) {
     setCartItems([]);
   }
 
+  function restoreStock(cartItems) {
+    cartItems.forEach((item) => {
+      updateStock(item.id, item.stock);
+    });
+  }
+
+  // Include restoreStock in the return statement
   return {
     cartItems,
     handleAddToCart,
     handleCompletePurchase,
+    handleEmptyCart,
+    restoreStock,
   };
 }

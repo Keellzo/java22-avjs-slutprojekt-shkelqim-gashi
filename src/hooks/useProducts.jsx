@@ -44,11 +44,13 @@ export function useProducts() {
   // Updates the stock of the product with the given productId in Firebase and updates the products state
   async function updateStock(productId, newStock) {
     await updateProductStock(productId, newStock);
-    setProducts(
-      products.map((p) => (p.id === productId ? { ...p, stock: newStock } : p))
+    setProducts((prevProducts) =>
+      prevProducts.map((p) =>
+        p.id === productId ? { ...p, stock: newStock } : p
+      )
     );
   }
-
+  
   return {
     products: filteredAndSortedProducts,
     sortOption,
@@ -56,7 +58,5 @@ export function useProducts() {
     filterText,
     setFilterText,
     updateStock,
-    restoreStock,
-    fetchProducts,
   };
 }

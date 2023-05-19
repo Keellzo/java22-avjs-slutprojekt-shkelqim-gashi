@@ -11,9 +11,15 @@ import { useState } from "react";
 
 function App() {
   const [view, setView] = useState("products");
-  const { products, setSortOption, setFilterText, updateStock, restoreStock } =
-    useProducts();
-  const { cartItems, emptyCart, handleAddToCart, handleCompletePurchase } = useCart(updateStock);
+  const { products, setSortOption, setFilterText, updateStock } = useProducts();
+  const {
+    cartItems,
+    handleAddToCart,
+    handleCompletePurchase,
+    handleEmptyCart,
+    restoreStock,
+  } = useCart(updateStock);
+
   const [showReceipt, setShowReceipt] = useState(false);
   const [purchasedItems, setPurchasedItems] = useState([]);
 
@@ -55,12 +61,16 @@ function App() {
       {view === "cart" && (
         <ShoppingCart
           cartItems={cartItems}
-          onEmptyCart={emptyCart}
+          onEmptyCart={() => {
+            handleEmptyCart();
+            setView("products");
+          }}
           onCompletePurchase={() => {
-            handleCompletePurchase();
             setPurchasedItems(cartItems);
-            emptyCart();
-            setShowReceipt(true);
+            handleCompletePurchase().then(() => {
+              setShowReceipt(true);
+              setView("products");
+            });
           }}
           onBackToProducts={() => setView("products")}
           onRestoreStock={restoreStock}
