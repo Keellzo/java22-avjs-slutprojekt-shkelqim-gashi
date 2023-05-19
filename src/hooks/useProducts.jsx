@@ -17,26 +17,6 @@ export function useProducts() {
     fetchProducts();
   }, [filterText, sortOption]);
 
-  // Restores the stock of cart items to their original values in Firebase and updates the products state
-  async function restoreStock(cartItems) {
-    const updatedProducts = [...products];
-
-    for (const item of cartItems) {
-      const newStock = item.originalStock;
-      await updateProductStock(item.id, newStock);
-
-      const productIndex = updatedProducts.findIndex((p) => p.id === item.id);
-      if (productIndex !== -1) {
-        updatedProducts[productIndex] = {
-          ...updatedProducts[productIndex],
-          stock: newStock,
-        };
-      }
-    }
-
-    setProducts(updatedProducts);
-  }
-
   // Sorts the given products array based on the selected sortOption
   function applySort(products) {
     const sortFunc = {
@@ -47,7 +27,6 @@ export function useProducts() {
 
     return sortOption ? products.sort(sortFunc[sortOption]) : products;
   }
-  
 
   // Filters the given products array based on the entered filterText
   function applyFilter(products) {

@@ -25,7 +25,9 @@ export default function Products({ onAddToCart, products, cartItems }) {
               ) : (
                 <button
                   className="product-button"
-                  onClick={() => onAddToCart(product)}
+                  onClick={() => {
+                    onAddToCart(product);
+                  }}
                 >
                   Add to Cart
                 </button>

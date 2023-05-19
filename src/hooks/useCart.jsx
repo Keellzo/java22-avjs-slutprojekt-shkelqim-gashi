@@ -19,6 +19,7 @@ export function useCart(updateStock) {
               : item
           )
         );
+        updateStock(product.id, product.stock - 1);
       }
     } else if (product.stock > 0) {
       // Only add product to cart if stock is greater than 0
@@ -29,25 +30,21 @@ export function useCart(updateStock) {
           quantity: 1,
         },
       ]);
+      updateStock(product.id, product.stock - 1);
     }
   }
 
   // Updates the stock in the database once the purchase is completed
   async function handleCompletePurchase() {
     for (const item of cartItems) {
-      const newStock = Math.max(item.stock - item.quantity, 0);
+      const newStock = item.stock - item.quantity;
       await updateStock(item.id, newStock);
     }
-  }
-
-  // Empties the cartItems state
-  function emptyCart() {
     setCartItems([]);
   }
 
   return {
     cartItems,
-    emptyCart,
     handleAddToCart,
     handleCompletePurchase,
   };
